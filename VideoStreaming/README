@@ -1,0 +1,14 @@
+Script enables use of Raspberry Pi camera for video streaming.
+
+Python code is created by Random Nerd Tutorials: https://randomnerdtutorials.com/video-streaming-with-raspberry-pi-camera/
+
+I've added instalaltion of Python module prerequisite and automated the process a bit.
+
+Commands to run:
+curl -o installation.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/installation.sh
+chmod +x installation.sh
+sh ./installation.sh
+curl -o rpi_camera_surveillance_system.py https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/rpi_camera_surveillance_system.py
+
+Single line command:
+curl -o installation.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/installation.sh && chmod +x installation.sh && sh ./installation.sh && curl -o rpi_camera_surveillance_system.py https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/rpi_camera_surveillance_system.py
