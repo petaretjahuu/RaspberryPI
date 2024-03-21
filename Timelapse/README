@@ -9,9 +9,17 @@ By the way, the Raspberry Pi is powered by a 20000 mAh powerbank. This powerbank
 # Instructions:
 ## CentOS
 Update the system, installs nano, and rsync. Create file for SSH authorization.
-curl -o centos.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos.sh && chmod +x centos.sh && sh ./centos.sh
+```curl -o centos.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos.sh && chmod +x centos.sh && sh ./centos.sh```
 
 Create "timelapse" user by running this command:
-curl -o centos_user.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos_user.sh && chmod +x centos_user.sh && sh ./centos_user.sh
+```curl -o centos_user.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos_user.sh && chmod +x centos_user.sh && sh ./centos_user.sh```
 
 ## Raspberry PI
+Using Buster significantly simplifies the camera setup process.
+User "timelapse" with password "timelapse" should be created while creating and writing Buster image to microSD card.
+To use camera module, it needs to be enabled through ```sudo raspi-config``` in Interface, while using webcam requires installation of ffmpeg package: ```sudo apt install ffmpeg -y```
+
+Update the system, install rsync and sshpass. Create ssh pass and directory for storing captures:
+```curl -o raspberrypi.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/raspberrypi.sh && chmod +x raspberrypi.sh && sh ./raspberrypi.sh```.
+
+Copy generated SSH key from ```~/.ssh/id_rsa.pub``` to CentOS file ```~/.ssh/authorized_keys```.
