@@ -7,19 +7,50 @@ There's also an option to use a regular USB webcam instead of the Raspberry Pi c
 By the way, the Raspberry Pi is powered by a 20000 mAh powerbank. This powerbank has power passthrough, which means I can charge it from an outlet on site while also providing power to the Raspberry Pi at the same time.
 
 # Instructions:
+## Router
+Create Port Forwarding rule for port 22 rsync uses that port for communication.
+
 ## CentOS
-Update the system, installs nano, and rsync. Create file for SSH authorization.
+Update the system, install nano and rsync. Create file for SSH authorization.
 ```curl -o centos.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos.sh && chmod +x centos.sh && sh ./centos.sh```
 
-Create "timelapse" user by running this command:
+Create "timelapse" user:
 ```curl -o centos_user.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos_user.sh && chmod +x centos_user.sh && sh ./centos_user.sh```
 
 ## Raspberry PI
 Using Buster significantly simplifies the camera setup process.
-User "timelapse" with password "timelapse" should be created while creating and writing Buster image to microSD card.
-To use camera module, it needs to be enabled through ```sudo raspi-config``` in Interface, while using webcam requires installation of ffmpeg package: ```sudo apt install ffmpeg -y```
+User "timelapse" with password "timelapse" should be created while creating and writing Buster image to microSD card (using [Raspberry Pi Imager](https://www.raspberrypi.com/software/)).
+To use camera module, it needs to be enabled in Interface through ```sudo raspi-config```, while using webcam requires installation of ffmpeg package: ```sudo apt install ffmpeg -y```
 
 Update the system, install rsync and sshpass. Create ssh pass and directory for storing captures:
 ```curl -o raspberrypi.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/raspberrypi.sh && chmod +x raspberrypi.sh && sh ./raspberrypi.sh```.
 
 Copy generated SSH key from ```~/.ssh/id_rsa.pub``` to CentOS file ```~/.ssh/authorized_keys```.
+
+## Scripts
+At this point, installation scripts can be removed:
+sudo rm centos.sh centos_user.sh raspberrypi.sh
+
+Create directory to store timelapse scripts:
+mkdir -p /home/timelapse/scripts && chmod ugo+rwx /home/timelapse/scripts
+
+Download script for capturing images:
+curl -o /home/timelapse/scripts/capture.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/scripts/capture.sh && chmod +x capture.sh
+
+Download script for uploading images:
+curl -o /home/timelapse/scripts/upload.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/scripts/upload.sh && chmod +x upload.sh
+
+Download script for deleting old images:
+curl -o /home/timelapse/scripts/delete.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/scripts/delete.sh && chmod +x delete.sh
+
+## Cron jobs
+Open cron configuration with command ```crontab -e``` and add following to the end of file:
+* * * * * sh /home/tlapse/capture.sh
+* * * * * sleep 15 && sh /home/tlapse/capture.sh
+* * * * * sleep 30 && sh /home/tlapse/capture.sh
+* * * * * sleep 45 && sh /home/tlapse/capture.sh
+* * * * * sh /home/tlapse/upload.sh
+0 3 * * * sh /home/tlapse/delete.sh
+
+This runs capture.sh every 15 seconds. First capture.sh is ran immediately, second waits for 15 seconds to be ran, third 30 seconds, and last 45 seconds.
+
