@@ -5,3 +5,13 @@ So, I set up the Raspberry Pi to take a picture every 15 seconds and save them s
 There's also an option to use a regular USB webcam instead of the Raspberry Pi camera module.
 
 By the way, the Raspberry Pi is powered by a 20000 mAh powerbank. This powerbank has power passthrough, which means I can charge it from an outlet on site while also providing power to the Raspberry Pi at the same time.
+
+# Instructions:
+## CentOS
+Update the system, installs nano, and rsync. Create file for SSH authorization.
+curl -o centos.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos.sh && chmod +x centos.sh && sh ./centos.sh
+
+Create "timelapse" user by running this command:
+curl -o centos_user.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos_user.sh && chmod +x centos_user.sh && sh ./centos_user.sh
+
+## Raspberry PI
