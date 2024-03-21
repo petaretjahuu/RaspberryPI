@@ -1,17 +1,17 @@
-Script enables use of Raspberry Pi camera for video streaming.
+Script that facilitates the utilization of the Raspberry Pi camera for seamless video streaming. This script leverages the capabilities of Buster, which significantly simplifies the camera setup process.
 
-Python code is created by Random Nerd Tutorials: https://randomnerdtutorials.com/video-streaming-with-raspberry-pi-camera/
+The Python code, originally crafted by Random Nerd Tutorials, serves as the foundation. The code is accessible via the following link: https://randomnerdtutorials.com/video-streaming-with-raspberry-pi-camera/
 
-I've added instalaltion of Python module prerequisite and automated the process a bit.
+In addition to the provided code, I have enhanced the functionality by automating the installation of prerequisite Python modules, streamlining the setup procedure.
 
-Commands to run:
+To initiate the installation process, execute the following commands in terminal:
 curl -o installation.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/installation.sh
 chmod +x installation.sh
 sh ./installation.sh
 curl -o rpi_camera_surveillance_system.py https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/rpi_camera_surveillance_system.py
 
-Single line command:
+Alternatively, following single-line command can be used for a more expedited setup:
 curl -o installation.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/installation.sh && chmod +x installation.sh && sh ./installation.sh && curl -o rpi_camera_surveillance_system.py https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/rpi_camera_surveillance_system.py
 
-Video streaming is started by running this command in terminal:
+Once the setup is complete, video streaming is started by executing the command below in terminal:
 python3 rpi_camera_surveillance_system.py
