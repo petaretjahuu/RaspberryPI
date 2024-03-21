@@ -1,1 +1,7 @@
+I wanted to use a Raspberry Pi with a camera to make a timelapse of a construction project. The problem was, the Raspberry Pi wouldn't always be connected to the internet. It would only go online when I was at the construction site and could use my smartphone's internet.
 
+So, I set up the Raspberry Pi to take a picture every 15 seconds and save them separately for each day. When it finally got online, it would use rsync to send all the pictures to my CentOS server. Then, the server would put together the pictures for each day and make them into timelapse videos.
+
+There's also an option to use a regular USB webcam instead of the Raspberry Pi camera module.
+
+By the way, the Raspberry Pi is powered by a 20000 mAh powerbank. This powerbank has power passthrough, which means I can charge it from an outlet on site while also providing power to the Raspberry Pi at the same time.
