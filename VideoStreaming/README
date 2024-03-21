@@ -12,3 +12,6 @@ curl -o rpi_camera_surveillance_system.py https://raw.githubusercontent.com/peta
 
 Single line command:
 curl -o installation.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/installation.sh && chmod +x installation.sh && sh ./installation.sh && curl -o rpi_camera_surveillance_system.py https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/VideoStreaming/rpi_camera_surveillance_system.py
+
+Video streaming is started by running this command in terminal:
+python3 rpi_camera_surveillance_system.py
