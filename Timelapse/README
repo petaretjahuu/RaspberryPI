@@ -13,12 +13,18 @@ By the way, the Raspberry Pi is powered by a 20000 mAh powerbank. This powerbank
 Create Port Forwarding rule for port 22 rsync uses that port for communication.
 
 ## CentOS
-Update the system, install nano and rsync. Create file for SSH authorization.
-```curl -o centos.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos.sh && chmod +x centos.sh && sh ./centos.sh```
+These commands should be run as root.
 
-Create "timelapse" user:
-```curl -o centos_user.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos_user.sh && chmod +x centos_user.sh && sh ./centos_user.sh```
+Install SSH server and start the service.
+```sudo yum install openssh-server -y && sudo systemctl start sshd```
 
+Create user "timelapse" with password "timelapse", and give it sudo privileges. Delete the script.
+```curl -o centos_user.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos_user.sh && chmod +x centos_user.sh && sh ./centos_user.sh && sudo rm ./centos_user.sh```
+
+Update the system, install nano and rsync. Create file for SSH authorization. Delete the script and reboot.
+```curl -o centos.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/centos.sh && chmod +x centos.sh && sh ./centos.sh && sudo rm ./centos.sh && sudo reboot```
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Raspberry PI
 Using Buster significantly simplifies the camera setup process.
 User "timelapse" with password "timelapse" should be created while creating and writing Buster image to microSD card (using [Raspberry Pi Imager](https://www.raspberrypi.com/software/)).
@@ -26,6 +32,7 @@ To use camera module, it needs to be enabled in Interface through ```sudo raspi-
 
 Update the system, install rsync and sshpass. Create ssh pass and directory for storing captures:
 ```curl -o raspberrypi.sh https://raw.githubusercontent.com/petaretjahuu/RaspberryPI/main/Timelapse/raspberrypi.sh && chmod +x raspberrypi.sh && sh ./raspberrypi.sh```.
+
 
 Copy generated SSH key from ```~/.ssh/id_rsa.pub``` to CentOS file ```~/.ssh/authorized_keys```.
 
